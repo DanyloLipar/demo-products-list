@@ -8,13 +8,16 @@ type Props = {
     prod: Product[],
 };
 
-export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
+export const NewProduct: React.FC<Props> = ({
+    addProduct,
+    prod,
+}) => {
     const [modal, setModal] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const [name, setName] = useState('');
-    const [count, setCount] = useState(-1);
-    const [width, setWidth] = useState(-1);
-    const [height, setHeight] = useState(-1);
+    const [count, setCount] = useState(Number(''));
+    const [width, setWidth] = useState(Number(''));
+    const [height, setHeight] = useState(Number(''));
     const [weight, setWeight] = useState('');
     const [description, setDescription] = useState('');
     const id = prod.length + 1;
@@ -26,14 +29,20 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
     const [widthCheck, setWidthCheck] = useState(false);
     const [heightCheck, setHeightCheck] = useState(false);
 
-    const AddProduct = () => {
+    const attachProduct = () => {
         setModal(!modal);
         document.body.style.overflow = "hidden";
     }
 
-    const closerModal = () => {
+    const closerModal = (event: React.FormEvent) => {
         setModal(!modal);
+        setCountCheck(false);
+        setImgUrlCheck(false);
+        setNameCheck(false);
+        setWidthCheck(false);
+        setHeightCheck(false);
         document.body.style.overflow = "visible";
+        event.preventDefault();
     }
 
     const inputError = () => {
@@ -45,22 +54,21 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
             setImgUrlCheck(true);
         }
 
-        if (count === 0) {
+        if (count === 0 || isNaN(count)) {
             setCountCheck(true);
         }
 
-        if (width === 0) {
+        if (width === 0 || isNaN(width)) {
             setWidthCheck(true);
         }
 
-        if (height === 0) {
+        if (height === 0 || isNaN(height)) {
             setHeightCheck(true);
         }
     };
 
     const onAdd = (event: React.FormEvent) => {
         event.preventDefault();
-
         const newProductItem: Product = {
             id,
             imageUrl,
@@ -83,7 +91,7 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
 
         if (name && imageUrl && count && width && height) {
             addProduct(newProductItem);
-            closerModal();
+            closerModal(event);
         }
     };
 
@@ -101,7 +109,6 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
                         <label className='form__name'>
                             Enter product name:
                             <input
-                                required
                                 className={classNames({
                                     'red': nameCheck,
                                 })}
@@ -113,7 +120,6 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
                         <label >
                             Quantity:
                             <input
-                                required
                                 className={classNames({
                                     'red': countCheck,
                                 })}
@@ -139,7 +145,6 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
                                 <label>
                                     Width:
                                     <input
-                                        required
                                         onChange={(event) => {
                                             setWidth(Number(event.target.value))
                                         }}
@@ -151,7 +156,6 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
                                 <label>
                                     Height:
                                     <input
-                                        required
                                         onChange={(event) => {
                                             setHeight(Number(event.target.value))
                                         }}
@@ -165,7 +169,6 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
                         <label>
                             Weight:
                             <input
-                                required
                                 onChange={(event) => {
                                     setWeight(event.target.value)
                                 }}
@@ -195,7 +198,7 @@ export const NewProduct: React.FC<Props> = ({ addProduct, prod }) => {
             </div>
             <button
                 type="button"
-                onClick={AddProduct}
+                onClick={attachProduct}
             >Add</button>
         </>
     )

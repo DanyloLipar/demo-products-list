@@ -5,6 +5,10 @@
     position: relative;
 }
 
+.red {
+    border: 2px solid red;
+}
+
 .modal {
     display: none;
 
@@ -33,12 +37,6 @@
     position: absolute;
     color: #000;
     border: 3px solid $general-color;
-
-    &__form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
 }
 
 .close {
@@ -56,6 +54,9 @@
 }
 
 .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     font-family: 'Lato', sans-serif;
 
     &__btn {

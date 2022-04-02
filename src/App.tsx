@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ProductList } from './components/ProductsList';
 import { getProducts } from './api/api';
 import { Product } from './types/Product';
-import classNames from 'classnames';
 import './App.scss';
 import { NewProduct } from './components/NewProduct';
 
@@ -34,7 +33,7 @@ export const App = () => {
         />
         <button
           onClick={() => {
-            setDeleting(true)
+            setDeleting(true);
           }}
         >Delete</button>
         {deleting && (<button
@@ -45,6 +44,7 @@ export const App = () => {
       </div>
       <div>
         <ProductList
+          setProduct={setProducts}
           products={products}
           del={deleting}
         />

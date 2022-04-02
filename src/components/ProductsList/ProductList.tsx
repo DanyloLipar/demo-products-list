@@ -6,9 +6,10 @@ import { ProductCard } from "../ProductCard";
 type Props = {
     products: Product[],
     del: boolean,
+    setProduct: (prod: Product[]) => void,
 };
 
-export const ProductList: React.FC<Props> = ({ products, del }) => {
+export const ProductList: React.FC<Props> = ({ products, del, setProduct }) => {
 
     return (
         <ul className='list'>
@@ -19,6 +20,8 @@ export const ProductList: React.FC<Props> = ({ products, del }) => {
                         className="list__product"
                     >
                         <ProductCard
+                            setProduct={setProduct}
+                            wholeProducts={products}
                             product={product}
                             del={del}
                         />
