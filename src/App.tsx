@@ -26,7 +26,7 @@ export const App = () => {
 
   return (
     <div className="app">
-      <div className='app__buttons'>
+      <div className='app__buttons b'>
         < NewProduct
           addProduct={addProduct}
           prod={products}
