@@ -4,12 +4,21 @@ body {
   background: $body-bckg;
 }
 
-.app__buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  padding-top: 70px;
+.app {
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-top: 70px;
+  }
+
+  &__list {
+    &-load {
+      font-size: 23px;
+      color: $white;
+    }
+  }
 
   &>button {
     font-size: 23px;

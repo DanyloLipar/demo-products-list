@@ -42,12 +42,18 @@ export const App = () => {
           }}
         >Cancel deleting</button>)}
       </div>
-      <div>
-        <ProductList
+      <div className='app__list'>
+        {!progress && (
+          <p className='app__list-load'>Loading data...</p>
+        )}
+        {(loadingError && progress) && (
+          <p>Failed loading data</p>
+        )}
+        {(!loadingError && progress) && (<ProductList
           setProduct={setProducts}
           products={products}
           del={deleting}
-        />
+        />)}
       </div>
     </div>
   );
