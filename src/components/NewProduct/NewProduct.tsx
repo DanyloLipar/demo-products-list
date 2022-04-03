@@ -34,7 +34,13 @@ export const NewProduct: React.FC<Props> = ({
         document.body.style.overflow = "hidden";
     }
 
+    const isUrl = (url: string) => {
+        return /^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)$/
+            .test(url);
+    };
+
     const closerModal = (event: React.FormEvent) => {
+        event.preventDefault();
         setModal(!modal);
         setCountCheck(false);
         setImgUrlCheck(false);
@@ -42,7 +48,6 @@ export const NewProduct: React.FC<Props> = ({
         setWidthCheck(false);
         setHeightCheck(false);
         document.body.style.overflow = "visible";
-        event.preventDefault();
     }
 
     const inputError = () => {
@@ -132,7 +137,9 @@ export const NewProduct: React.FC<Props> = ({
                             img(URL):
                             <input
                                 onChange={(event) => {
-                                    setImageUrl(event.target.value)
+                                    if (isUrl(event.target.value)) {
+                                        setImageUrl(event.target.value)
+                                    }
                                 }}
                                 className={classNames({
                                     'red': imgUrlCheck,

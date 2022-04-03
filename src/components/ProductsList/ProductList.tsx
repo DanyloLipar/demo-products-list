@@ -12,21 +12,23 @@ type Props = {
 export const ProductList: React.FC<Props> = ({ products, del, setProduct }) => {
 
     return (
-        <ul className='list'>
-            {products.sort((el1, el2) => el1.name.toLowerCase().localeCompare(el2.name.toLowerCase()))
-                .map(product => (
-                    <li
-                        key={product.id}
-                        className="list__product"
-                    >
-                        <ProductCard
-                            setProduct={setProduct}
-                            wholeProducts={products}
-                            product={product}
-                            del={del}
-                        />
-                    </li>
-                ))}
-        </ul>
+        <>
+            <ul className='list'>
+                {products.sort((el1, el2) => el1.name.toLowerCase().localeCompare(el2.name.toLowerCase()))
+                    .map(product => (
+                        <li
+                            key={product.id}
+                            className="list__product"
+                        >
+                            <ProductCard
+                                setProduct={setProduct}
+                                wholeProducts={products}
+                                product={product}
+                                del={del}
+                            />
+                        </li>
+                    ))}
+            </ul>
+        </>
     );
 };

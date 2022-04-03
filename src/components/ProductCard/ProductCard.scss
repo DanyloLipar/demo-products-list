@@ -44,12 +44,62 @@
             width: 30px;
             height: 30px;
         }
+
+        &-edit {
+            border: 2px solid $edit;
+            background: $general-color;
+        }
+
+        &-cancel {
+            background: $white;
+            border: 2px solid $remove;
+        }
     }
+}
+
+.opened {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.error {
+    border: 2px solid $remove;
 }
 
 .comment {
     &__content>p>span {
         display: block;
         font-size: 11px;
+    }
+}
+
+.deleting {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: $card-back;
+    border: 3px solid $secondary;
+
+    &__btn {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+
+        &-yes {
+            background: $white;
+            border: 2px solid $remove;
+        }
     }
 }
